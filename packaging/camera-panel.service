@@ -1,0 +1,15 @@
+[Unit]
+Description=Camera Panel ONVIF camera tray
+After=graphical-session-pre.target
+PartOf=graphical-session.target
+ConditionEnvironment=WAYLAND_DISPLAY
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/camera-panel --background
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=5
+
+[Install]
+WantedBy=graphical-session.target

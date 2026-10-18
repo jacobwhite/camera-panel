@@ -1,0 +1,7 @@
+include camera-panel install.py
+include LICENSE CHANGELOG.md
+include docs/camera-panel-demo.png
+include packaging/camera-panel.desktop packaging/camera-panel.service
+exclude packaging/PKGBUILD packaging/.SRCINFO
+recursive-include tests *.py
+global-exclude __pycache__ *.py[cod]

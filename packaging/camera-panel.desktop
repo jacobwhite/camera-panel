@@ -1,0 +1,15 @@
+[Desktop Entry]
+Type=Application
+Name=Camera Panel
+Comment=Live ONVIF cameras in a top-edge panel
+Exec=camera-panel
+Icon=camera-panel
+Terminal=false
+Categories=AudioVideo;Video;
+Keywords=cameras;NVR;ONVIF;security;
+StartupNotify=false
+Actions=Settings;
+
+[Desktop Action Settings]
+Name=Manage NVRs
+Exec=camera-panel --settings

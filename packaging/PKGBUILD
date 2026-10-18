@@ -1,0 +1,27 @@
+# Maintainer: Jacob White <me@jacobwhite.us>
+pkgname=camera-panel
+pkgver=0.1.0
+pkgrel=1
+pkgdesc='A native, local-only ONVIF camera panel for Wayland'
+arch=('any')
+url='https://github.com/jacobwhite/camera-panel'
+license=('Unlicense')
+depends=('python>=3.11' 'python-gobject' 'python-requests' 'gtk4>=4.12' 'gtk4-layer-shell' 'libsecret' 'ffmpeg')
+optdepends=('ufw: optional discovery firewall setup' 'polkit: authorization for optional firewall setup')
+makedepends=('python-build' 'python-installer' 'python-wheel' 'python-setuptools')
+source=("$url/releases/download/v$pkgver/camera_panel-$pkgver.tar.gz")
+sha256sums=('45ceafae05e7e010d3232735bd746526a8a5254ec946a9165a0bafecf72a9050')
+
+build() {
+    cd "$srcdir/camera_panel-$pkgver"
+    python -m build --wheel --no-isolation
+}
+
+package() {
+    cd "$srcdir/camera_panel-$pkgver"
+    python -m installer --destdir="$pkgdir" dist/*.whl
+    install -Dm644 packaging/camera-panel.desktop "$pkgdir/usr/share/applications/camera-panel.desktop"
+    install -Dm644 packaging/camera-panel.service "$pkgdir/usr/lib/systemd/user/camera-panel.service"
+    install -Dm644 lookout/lookout.svg "$pkgdir/usr/share/icons/hicolor/scalable/apps/camera-panel.svg"
+    install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}

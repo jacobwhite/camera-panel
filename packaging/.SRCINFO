@@ -1,0 +1,24 @@
+pkgbase = camera-panel
+	pkgdesc = A native, local-only ONVIF camera panel for Wayland
+	pkgver = 0.1.0
+	pkgrel = 1
+	url = https://github.com/jacobwhite/camera-panel
+	arch = any
+	license = Unlicense
+	makedepends = python-build
+	makedepends = python-installer
+	makedepends = python-wheel
+	makedepends = python-setuptools
+	depends = python>=3.11
+	depends = python-gobject
+	depends = python-requests
+	depends = gtk4>=4.12
+	depends = gtk4-layer-shell
+	depends = libsecret
+	depends = ffmpeg
+	optdepends = ufw: optional discovery firewall setup
+	optdepends = polkit: authorization for optional firewall setup
+	source = https://github.com/jacobwhite/camera-panel/releases/download/v0.1.0/camera_panel-0.1.0.tar.gz
+	sha256sums = 45ceafae05e7e010d3232735bd746526a8a5254ec946a9165a0bafecf72a9050
+
+pkgname = camera-panel

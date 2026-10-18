@@ -1,0 +1,35 @@
+name: Test and Build
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: archlinux:base
+    steps:
+      - name: Install build and runtime dependencies
+        run: >-
+          pacman -Syu --noconfirm --needed git python python-gobject python-requests
+          gtk4 gtk4-layer-shell libsecret ffmpeg dbus fontconfig
+          python-build python-installer python-wheel python-setuptools desktop-file-utils
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Unit and packaging tests
+        run: python -m unittest discover -s tests -v
+      - name: Build source distribution and wheel
+        run: python -m build --no-isolation
+      - name: Validate desktop assets
+        run: |
+          desktop-file-validate packaging/camera-panel.desktop
+          bash -n packaging/PKGBUILD
+          python camera-panel --version
+      - uses: actions/upload-artifact@v4
+        with:
+          name: camera-panel-distributions
+          path: dist/*

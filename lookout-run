@@ -1,0 +1,4 @@
+#!/usr/bin/python
+from lookout.__main__ import main
+
+raise SystemExit(main())

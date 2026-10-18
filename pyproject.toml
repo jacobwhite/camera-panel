@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "camera-panel"
+version = "0.1.0"
+description = "A native, local-only ONVIF camera panel for Wayland"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Unlicense"
+license-files = ["LICENSE"]
+authors = [{name = "Jacob White", email = "me@jacobwhite.us"}]
+# PyGObject, GTK4, gtk4-layer-shell, libsecret and FFmpeg are system runtime
+# dependencies. Do not make pip compile PyGObject as part of a normal install.
+dependencies = ["requests"]
+keywords = ["onvif", "nvr", "cameras", "wayland", "omarchy"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Topic :: Multimedia :: Video :: Display",
+]
+
+[project.urls]
+Homepage = "https://github.com/jacobwhite/camera-panel"
+Issues = "https://github.com/jacobwhite/camera-panel/issues"
+Source = "https://github.com/jacobwhite/camera-panel"
+
+[project.scripts]
+camera-panel = "lookout.__main__:main"
+
+[tool.setuptools]
+packages = ["lookout"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+lookout = ["lookout.svg"]
